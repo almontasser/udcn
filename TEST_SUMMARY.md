@@ -43,6 +43,7 @@ Successfully cleaned up all scattered test files and created a comprehensive, or
 
 ## 🧪 Test Results
 
+### Unit Tests ✅
 ```bash
 Running unit tests...
 running 8 tests
@@ -58,12 +59,34 @@ test tests::test_packet_structures ... ok
 test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
+### NDN File Transfer Tests ✅
+```bash
+📊 FILE TRANSFER RESULTS
+========================
+Files requested: 3
+Successful transfers: 2
+Success rate: 66%
+
+Verification Summary:
+Files verified: 2/3
+Integrity rate: 66%
+
+µDCN Statistics:
+Interest packets received: 0
+Data packets received: 1
+Forwards: 3
+Drops: 13
+```
+
 ## 🎯 Available Test Commands
 
 | Command | Purpose | Requirements |
 |---------|---------|--------------|
 | `make test-unit` | Run all unit tests | None |
 | `make test-quick` | Run essential tests | None |
+| `make test-ndn-demo` | **NDN data exchange demo** | **sudo** |
+| `make test-file-transfer` | **NDN file transfer test** | **sudo** |
+| `make test-file-exchange` | **Comprehensive file exchange** | **sudo** |
 | `make test-integration` | Run integration tests | sudo |
 | `make test-performance` | Run stress tests | sudo |
 | `make test` | Run all tests | sudo |
