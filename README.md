@@ -108,7 +108,9 @@ Terminal 3 (view statistics):
 
 ## Testing
 
-Run the automated test suite:
+Run the automated test suite using the helper script. This script builds the
+project, sets up a temporary test interface, runs a quick Interest/Data
+exchange, and prints the resulting statistics:
 
 ```bash
 ./test_udcn.sh

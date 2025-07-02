@@ -191,7 +191,7 @@ fn handle_interest(interest: udcn_common::InterestPacket) -> Result<u32, u32> {
         timestamp: 0,
     };
 
-    if let Err(_) = unsafe { PIT.insert(&name_hash, &pit_entry, 0) } {
+    if let Err(_) = PIT.insert(&name_hash, &pit_entry, 0) {
         update_stats(|stats| stats.drops += 1);
         return Ok(xdp_action::XDP_DROP);
     }
@@ -202,10 +202,10 @@ fn handle_interest(interest: udcn_common::InterestPacket) -> Result<u32, u32> {
 fn handle_data(data_pkt: udcn_common::DataPacket, _full_packet: &[u8]) -> Result<u32, u32> {
     let name_hash = data_pkt.name_hash;
     
-    if let Some(_pit_entry) = unsafe { PIT.get(&name_hash) } {
+    if let Some(_pit_entry) = PIT.get(&name_hash) {
         update_stats(|stats| stats.pit_hits += 1);
         
-        let _ = unsafe { PIT.remove(&name_hash) };
+        let _ = PIT.remove(&name_hash);
 
         let cache_entry = CacheEntry {
             name_hash,
@@ -213,7 +213,7 @@ fn handle_data(data_pkt: udcn_common::DataPacket, _full_packet: &[u8]) -> Result
             timestamp: 0,
         };
 
-        let _ = unsafe { CONTENT_STORE.insert(&name_hash, &cache_entry, 0) };
+        let _ = CONTENT_STORE.insert(&name_hash, &cache_entry, 0);
 
         // For now, skip actual data caching to avoid verifier issues
         // In a real implementation, we'd copy packet data here
