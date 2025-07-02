@@ -5,12 +5,16 @@ edition = "2021"
 
 license.workspace = true
 
+[dependencies]
+aya = { workspace = true, optional = true }
+
+[dev-dependencies]
+rand = { workspace = true }
+
 [features]
 default = []
 user = ["aya"]
-
-[dependencies]
-aya = { workspace = true, optional = true }
+std = []
 
 [lib]
 path = "src/lib.rs"

@@ -6,7 +6,7 @@ edition = "2021"
 license.workspace = true
 
 [dependencies]
-udcn-common = { path = "../udcn-common", features = ["user"] }
+udcn-common = { path = "../udcn-common", features = ["user", "std"] }
 
 anyhow = { workspace = true, default-features = true }
 aya = { workspace = true }
@@ -20,8 +20,10 @@ tokio = { workspace = true, features = [
     "rt-multi-thread",
     "net",
     "signal",
+    "time",
 ] }
 clap = { workspace = true, features = ["derive"] }
+rand = "0.8"
 [build-dependencies]
 anyhow = { workspace = true }
 aya-build = { workspace = true }
@@ -42,3 +44,7 @@ udcn-ebpf = { path = "../udcn-ebpf" }
 [[bin]]
 name = "udcn"
 path = "src/main.rs"
+
+[[example]]
+name = "benchmark"
+path = "../examples/benchmark.rs"
